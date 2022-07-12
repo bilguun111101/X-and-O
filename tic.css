@@ -1,0 +1,142 @@
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    outline: none;
+    list-style: none;
+    border: none;
+    text-decoration: none;
+    font-family: sans-serif;
+    padding: 0%; margin: 0%;
+    background: none;
+}
+button {
+    cursor: pointer;
+}
+button:active {
+    opacity: 0.9;
+}
+
+.game {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.box {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.box:first-child,
+.box:nth-child(2),
+.box:nth-child(3) {
+    border-top: none;
+}
+
+.box:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.box:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.box:nth-child(9),
+.box:nth-child(7),
+.box:nth-child(8) {
+    border-bottom: none;
+}
+
+.box.x::after,
+.box.x::before,
+.game.x .box:not(.x):not(.circle):hover:before,
+.game.x .box:not(.x):not(.circle):hover:after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    background: #000;
+}
+
+.game.x .box:not(.x):not(.circle):hover::after,
+.game.x .box:not(.x):not(.circle):hover::before {
+    background: lightgray;
+}
+
+.box.x::before,
+.game.x .box:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+.box.x::after,
+.game.x .box:not(.x):not(.circle):hover:after {
+    transform: rotate(-45deg);
+}
+
+
+.box.circle::after,
+.box.circle::before,
+.game.circle .box:not(.x):not(.circle):hover::before,
+.game.circle .box:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #000;
+}
+
+.box.circle::before,
+.game.circle .box:not(.x):not(.circle):hover::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    background: #000;
+}
+
+.box.circle::after,
+.game.circle .box:not(.x):not(.circle):hover::after {
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background: #FFF;
+}
+
+.game.circle .box:not(.x):not(.circle):hover:before {
+    background: lightgray;
+}
+
+.winning-message {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0%;
+    background: rgba(0, 0, 0, .9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #FFF;
+    font-size: 4em;
+}
+
+#restartButton {
+    margin-top: 1em;
+    color: #FFF;
+}
+
+.show {
+    display: flex;
+}
+
+.box {
+    font-size: 3em;
+}
